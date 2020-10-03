@@ -6,15 +6,17 @@ def binary_search(arr, target, start, end):
     # print('arr[middle]: ', arr[middle])
     # print('middle', middle)
     if end >= start:
-
+        # sets middle index
         middle = (start + end) // 2
-
+        # base case for recursion, if middle value is target, return
         if arr[middle] == target:
             return middle
-        
+        #recursion
         elif arr[middle] > target:
+            # moves middle to the left of the BST and re-runs search
             return binary_search(arr, target, start, middle - 1)
         elif arr[middle] < target:
+            # moves middle to the right of the BST and re-runs search
             return binary_search(arr, target, middle + 1, end)
     else:
         return -1
