@@ -34,6 +34,7 @@ def agnostic_binary_search(arr, target):
     first = 0
     last = (len(arr) - 1)
     found = False
+    # check for ascending order
     if arr[first] <= arr[last]:
         while first <= last and not found:
             middle = (first + last) // 2
@@ -46,16 +47,26 @@ def agnostic_binary_search(arr, target):
                     first = middle + 1
         if found is False:
             return -1
+    # check for descending order
     if arr[first] > arr[last]:
+        # while the first item in the array is still larger and the target is not found
         while arr[first] >= arr[last] and not found:
+            # change the middle value to the middle value of the array
             middle = (first + last) // 2
+            # check middle for target value, if found return arrau index
             if arr[middle] == target:
                 found = middle
             else:
+            # if the target is smaller than the number at the middle index
                 if target < arr[middle]:
+                    # shift the starting index to the index to the right of the current middle
                     first = middle + 1
                 else:
+                    # otherwise, the target is larger, and the new ending index will be the index to the left of the current middle
                     last = middle - 1
+        # if the program falls out of the while loop and the target is still flase
         if found is False:
+            # return falsy value
             return -1
+    # return index of target value
     return found
