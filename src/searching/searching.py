@@ -1,7 +1,7 @@
 # TO-DO: Implement a recursive implementation of binary search
 def binary_search(arr, target, start, end):
     # Your code here
-    
+
     # print('target: ', target)
     # print('arr[middle]: ', arr[middle])
     # print('middle', middle)
@@ -11,7 +11,7 @@ def binary_search(arr, target, start, end):
         # base case for recursion, if middle value is target, return
         if arr[middle] == target:
             return middle
-        #recursion
+        # recursion
         elif arr[middle] > target:
             # moves middle to the left of the BST and re-runs search
             return binary_search(arr, target, start, middle - 1)
@@ -20,16 +20,42 @@ def binary_search(arr, target, start, end):
             return binary_search(arr, target, middle + 1, end)
     else:
         return -1
-    
-
 
 # STRETCH: implement an order-agnostic binary search
-# This version of binary search should correctly find 
+# This version of binary search should correctly find
 # the target regardless of whether the input array is
 # sorted in ascending order or in descending order
-# You can implement this function either recursively 
+# You can implement this function either recursively
 # or iteratively
+
 
 def agnostic_binary_search(arr, target):
     # Your code here
-    return True
+    first = 0
+    last = (len(arr) - 1)
+    found = False
+    if arr[first] <= arr[last]:
+        while first <= last and not found:
+            middle = (first + last) // 2
+            if arr[middle] == target:
+                found = middle
+            else:
+                if target < arr[middle]:
+                    last = middle - 1
+                else:
+                    first = middle + 1
+        if found is False:
+            return -1
+    if arr[first] > arr[last]:
+        while arr[first] >= arr[last] and not found:
+            middle = (first + last) // 2
+            if arr[middle] == target:
+                found = middle
+            else:
+                if target < arr[middle]:
+                    first = middle + 1
+                else:
+                    last = middle - 1
+        if found is False:
+            return -1
+    return found
